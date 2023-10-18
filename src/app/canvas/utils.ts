@@ -1,25 +1,20 @@
 export const getRandomColor = () => {
-  const colors = [
-    "#f94144",
-    "#f3722c",
-    "#f8961e",
-    "#f9844a",
-    "#f9c74f",
-    "#90be6d",
-    "#43aa8b",
-    "#4d908e",
-    "#577590",
-    "#277da1",
-  ];
-  return colors[Math.floor(Math.random() * colors.length)];
+  return `rgb(${Math.floor(Math.random() * 255)},${Math.floor(
+    Math.random() * 255
+  )},${Math.floor(Math.random() * 255)})`;
 };
-export const getRandomSize = () => Math.floor(Math.random() * 1000);
-
+export const getRandomSize = () => Math.floor(Math.random() * 250);
+const repeat = (n: number) => (fn: (x: any, i: number) => void) => {
+  Array.from({ length: n }).forEach(fn);
+};
 export const squareMultiColorPattern = (ctx: CanvasRenderingContext2D) => {
   ctx.lineWidth = 5;
-  ctx.strokeStyle = getRandomColor();
   const size = getRandomSize();
-  Array.from({ length: 50 }).forEach((_, i) => {
-    ctx?.strokeRect(size * i, size * i, size, size);
+
+  repeat(50)((_, i) => {
+    ctx.strokeStyle = getRandomColor();
+    ctx.fillStyle = getRandomColor();
+    ctx.rotate(Math.floor(Math.random() * 360));
+    ctx?.strokeRect(getRandomSize() * i, getRandomSize() * i, size, size);
   });
 };

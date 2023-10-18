@@ -8,7 +8,6 @@ export const useCanvas = () => {
     setC(cRef.current);
     if (!c) return;
     setCtx(c.getContext("2d"));
-    if (!ctx) return;
   });
 
   return { cRef, c, ctx };
